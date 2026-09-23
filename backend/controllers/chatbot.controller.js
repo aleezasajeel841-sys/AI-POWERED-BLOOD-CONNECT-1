@@ -105,6 +105,9 @@ const searchWithTavily = async (query) => {
 export const getChatbotResponse = async (req, res) => {
     try {
         const { message, userId, userType, sessionId, useSearch } = req.body;
+        const normalizedUserType = userType?.toLowerCase() === 'guest'
+            ? 'Anonymous'
+            : userType;
 
         if (!message || typeof message !== 'string' || !message.trim()) {
             return res.status(400).json({ message: 'Message is required' });
@@ -131,9 +134,9 @@ export const getChatbotResponse = async (req, res) => {
 
         // Save interaction (non-blocking: ignore errors)
         try {
-            ChatbotInteraction.create({
+            await ChatbotInteraction.create({
                 userId,
-                userType,
+                userType: normalizedUserType,
                 userMessage: message,
                 botResponse,
                 intent,

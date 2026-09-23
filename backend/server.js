@@ -198,18 +198,18 @@ app.use((req, res, next) => {
   res.status(404).json({ success: false, message: "Route not found" });
 });
 
-cron.schedule("* * * * *", async () => {
-  await BloodInventory.updateExpiredStatus();
-  await BloodInventory.updateExpiringSoonStatus();
-  await HealthEvaluation.cancelExpiredEvaluations();
-  await HealthEvaluation.updateHealthStatusAfter56Days();
-  await EmergencyBR.cancelExpiredRequests();
-  await Appointment.cancelExpiredAppointments();
-  await Appointment.updateAppointmentStatusAfter56Days();
-  console.log("Running a task every minute");
-  
-  // Add your scheduled task logic here
-});
+if (process.env.VERCEL !== "1") {
+  cron.schedule("* * * * *", async () => {
+    await BloodInventory.updateExpiredStatus();
+    await BloodInventory.updateExpiringSoonStatus();
+    await HealthEvaluation.cancelExpiredEvaluations();
+    await HealthEvaluation.updateHealthStatusAfter56Days();
+    await EmergencyBR.cancelExpiredRequests();
+    await Appointment.cancelExpiredAppointments();
+    await Appointment.updateAppointmentStatusAfter56Days();
+    console.log("Running a task every minute");
+  });
+}
 
 // Global Error Handling Middleware
 app.use((error, req, res, next) => {
@@ -237,8 +237,12 @@ app.post('/api/test-notification', async (req, res) => {
 
 
 // Database Connection and Server Start
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+if (process.env.VERCEL !== "1") {
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   });
-});
+}
+
+export default app;

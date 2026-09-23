@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { AuthContextProvider } from './contexts/AuthContext.jsx'
 import { SecondAuthProvider } from './contexts/SecondAuthContext.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import './config/api.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

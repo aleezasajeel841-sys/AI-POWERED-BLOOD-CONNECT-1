@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, Button, TextInput, Spinner, Avatar, Badge } from "flowbite-react";
-import { FaRobot, FaUser, FaPaperPlane, FaSearch, FaLink, FaInfoCircle } from "react-icons/fa";
+import { FaRobot, FaPaperPlane, FaSearch, FaInfoCircle } from "react-icons/fa";
 import { HiLightningBolt, HiOutlineExternalLink } from "react-icons/hi";
 import { useChatbot } from "../hooks/chatbot";
 import { toast } from "react-toastify";
+import Logo from "../assets/logo.svg";
 
 export default function Chatbot() {
   const { getChatbotResponse, getChatHistory, loading, searchMode, toggleSearchMode } = useChatbot();
@@ -34,7 +35,7 @@ export default function Chatbot() {
     try {
       const history = await getChatHistory();
       setChatHistory(history);
-    } catch (error) {
+    } catch {
       console.error("Failed to load chat history");
     }
   };
@@ -71,7 +72,7 @@ export default function Chatbot() {
       };
       
       setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
+    } catch {
       toast.error("Failed to get response from chatbot");
       const errorMessage = {
         id: Date.now() + 1,
@@ -154,7 +155,7 @@ export default function Chatbot() {
             </Badge>
             <Button
               size="xs"
-              color={searchMode ? "blue" : "light"}
+              color={searchMode ? "failure" : "light"}
               onClick={handleToggleSearchMode}
               className="flex items-center"
             >
@@ -169,6 +170,46 @@ export default function Chatbot() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6">
+          {/* Chat History Sidebar */}
+          <aside className="lg:col-span-1 lg:order-first bg-gray-900 min-h-[600px] flex flex-col shadow-xl">
+            <div className="flex items-center justify-center py-5 border-b border-gray-700">
+              <img src={Logo} alt="Blood Connect Logo" className="w-8 h-8 mr-2" />
+              <span className="text-white text-xl font-semibold">Blood Connect</span>
+            </div>
+
+            <div className="flex-1 overflow-y-auto py-4">
+              <div className="flex items-center px-4 py-3 bg-gray-700 text-gray-100">
+                <FaSearch className="w-5 h-5 mr-3" />
+                <span>Recent Conversations</span>
+              </div>
+              <div className="space-y-2 px-3 py-3 max-h-96 overflow-y-auto">
+                {chatHistory.slice(0, 5).map((chat, index) => (
+                  <div key={index} className="text-sm p-3 bg-gray-800 rounded hover:bg-gray-700 transition-colors">
+                    <p className="font-medium text-gray-100 truncate">
+                      {chat.userMessage}
+                    </p>
+                    <p className="text-gray-400 text-xs mt-1">
+                      {new Date(chat.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                ))}
+                {chatHistory.length === 0 && (
+                  <p className="text-gray-400 text-sm px-1">No previous conversations</p>
+                )}
+              </div>
+            </div>
+
+            <div className="p-4 border-t border-gray-700 text-gray-400">
+              <h3 className="text-sm font-semibold text-gray-100 mb-3">About Echo</h3>
+              <div className="text-xs space-y-2">
+                <p>🤖 AI-powered assistant</p>
+                <p>🩸 Blood donation expert</p>
+                <p>💬 24/7 available</p>
+                <p>🇵🇰 Pakistan focused</p>
+              </div>
+            </div>
+          </aside>
+
           {/* Chat Interface */}
           <div className="lg:col-span-3">
             <Card className="bg-white bg-opacity-95 border-red-100 h-[600px] flex flex-col shadow-xl">
@@ -268,13 +309,10 @@ export default function Chatbot() {
                 </div>
               </div>
             </Card>
-          </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
             {/* Quick Questions */}
-            <Card className="bg-white bg-opacity-95 border-red-100 shadow-xl">
-              <h3 className="text-lg font-semibold mb-3 text-gray-800 flex items-center">
+            <Card className="mt-6 max-w-2xl mx-auto bg-white bg-opacity-95 border-red-100 shadow-xl">
+              <h3 className="text-base font-semibold mb-2 text-gray-800 flex items-center">
                 <HiLightningBolt className="mr-2 text-red-600" />
                 Quick Questions
               </h3>
@@ -284,7 +322,7 @@ export default function Chatbot() {
                     key={index}
                     gradientDuoTone="pinkToOrange"
                     outline
-                    className="w-full justify-start text-left text-sm py-2 transition-all hover:shadow-md"
+                    className="w-full justify-start text-left text-sm py-1.5 whitespace-nowrap transition-all hover:shadow-md"
                     onClick={() => {
                       setInputMessage(question);
                       setTimeout(() => handleSendMessage(), 100);
@@ -311,37 +349,6 @@ export default function Chatbot() {
                     Medications
                   </Badge>
                 </div>
-              </div>
-            </Card>
-
-            {/* Chat History */}
-            <Card className="bg-white bg-opacity-95 border-red-100">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Conversations</h3>
-              <div className="space-y-2 max-h-48 overflow-y-auto">
-                {chatHistory.slice(0, 5).map((chat, index) => (
-                  <div key={index} className="text-sm p-2 bg-gray-50 rounded">
-                    <p className="font-medium text-gray-800 truncate">
-                      {chat.userMessage}
-                    </p>
-                    <p className="text-gray-600 text-xs">
-                      {new Date(chat.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                ))}
-                {chatHistory.length === 0 && (
-                  <p className="text-gray-500 text-sm">No previous conversations</p>
-                )}
-              </div>
-            </Card>
-
-            {/* Info Card */}
-            <Card className="bg-white bg-opacity-95 border-red-100">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">About Echo</h3>
-              <div className="text-sm text-gray-600 space-y-2">
-                <p>🤖 AI-powered assistant</p>
-                <p>🩸 Blood donation expert</p>
-                <p>💬 24/7 available</p>
-                <p>🇵🇰 Pakistan focused</p>
               </div>
             </Card>
           </div>

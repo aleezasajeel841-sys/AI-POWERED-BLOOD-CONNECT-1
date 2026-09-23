@@ -97,7 +97,7 @@ export default function HospitalAdminLogin() {
 
             <Button
               type="submit"
-              gradientDuoTone="cyanToBlue"
+              gradientDuoTone="redToPink"
               size="lg"
               className="w-full font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
               disabled={loading}

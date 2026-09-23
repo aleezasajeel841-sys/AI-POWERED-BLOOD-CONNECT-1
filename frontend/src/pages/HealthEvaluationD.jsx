@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { apiUrl } from "../config/api.js";
 import { Button, Table, Modal, Label, TextInput, FileInput, Spinner, Textarea, Select } from "flowbite-react";
 import { DashboardSidebar } from "../components/DashboardSidebar";
 import { useHealthEvaluation } from "../hooks/useHealthEvaluation";
@@ -254,7 +255,7 @@ export default function AppointmentD() {
               <div className="flex flex-col items-center">
                 <p className="text-green-600 mb-2">Report generated!</p>
                 <a
-                  href={`http://localhost:3020${reportUrl}`}
+                  href={apiUrl(reportUrl)}
                   download
                   className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
@@ -340,7 +341,7 @@ export default function AppointmentD() {
                   <Table.Cell>{evaluation.hospital?.name || "N/A"}</Table.Cell>
                   <Table.Cell>
                     <div className="flex gap-2">
-                      <Button size="xs" color="blue" onClick={() => handleDetailsClick(evaluation)}>
+                      <Button size="xs" color="failure" onClick={() => handleDetailsClick(evaluation)}>
                         Details
                       </Button>
                       {Hospital && HospitalAdmin && (

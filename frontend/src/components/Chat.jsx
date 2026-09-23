@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Modal } from 'flowbite-react';
+import { apiUrl } from '../config/api';
 
 function Chat({ isOpen, onClose }) {
     const [messages, setMessages] = useState([]);
@@ -16,7 +17,7 @@ function Chat({ isOpen, onClose }) {
         setIsTyping(true);
 
         try {
-            const response = await fetch('/api/chatbot/chat', {
+            const response = await fetch(apiUrl('/api/chatbot/chat'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

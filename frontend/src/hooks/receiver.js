@@ -5,7 +5,13 @@ import { toast } from 'react-toastify';
 export const useReceiver = () => {
   const [loading, setLoading] = useState(false);
   const [receivers, setReceivers] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('user')) || null;
+    } catch {
+      return null;
+    }
+  });
 
   const createReceiver = async (receiverData) => {
     setLoading(true);
@@ -37,10 +43,11 @@ export const useReceiver = () => {
     try {
       const response = await axios.post('/api/auth/receiver-login', credentials);
       const { token, receiver } = response.data;
+      const sessionUser = { userObj: receiver, role: 'Receiver' };
 
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify({ ...receiver, role: 'Receiver' }));
-      setUser({ ...receiver, role: 'Receiver' });
+      localStorage.setItem('user', JSON.stringify(sessionUser));
+      setUser(sessionUser);
 
       toast.success('Login successful!');
       return response.data;
@@ -57,7 +64,9 @@ const getReceiverProfile = async () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/receiver/profile', {
+      const storedUser = JSON.parse(localStorage.getItem('user') || 'null');
+      const receiverId = user?.userObj?._id || storedUser?.userObj?._id;
+      const response = await axios.get(`/api/receiver/${receiverId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

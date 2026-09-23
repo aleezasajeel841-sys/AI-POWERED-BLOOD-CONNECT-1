@@ -1,4 +1,5 @@
 import React from 'react';
+import { apiUrl } from '../config/api.js';
 
 const items = [
   { label: 'Inventory (All)', path: '/api/reports/inventory-report' },
@@ -16,7 +17,7 @@ const items = [
 ];
 
 export default function Reports() {
-  const base = 'http://localhost:3020';
+  const base = apiUrl();
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow p-6">

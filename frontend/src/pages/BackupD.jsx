@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { apiUrl } from '../config/api.js';
 
 export default function BackupD() {
   const [backups, setBackups] = useState([]);
   const [loading, setLoading] = useState(false);
-  const base = 'http://localhost:3020/api/backup';
+  const base = apiUrl('/api/backup');
 
   const fetchBackups = async () => {
     setLoading(true);

@@ -77,18 +77,11 @@ export default function DonorLogin() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
+      className="auth-image-bg min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="login-container animate-fade-in">
         <div className="login-header">
-          <Button
-            onClick={() => navigate("/Hospital_login")}
-            size="sm"
-            className="absolute top-4 right-4 bg-colour3 hover:bg-colour2 text-white border-none focus:ring-4 focus:ring-colour2/40 transition-all duration-300 rounded-full z-10"
-          >
-            Hospital Login
-          </Button>
           <h2 className="text-3xl font-extrabold">Donor Login</h2>
           <p className="mt-2 text-sm">
             Sign in to your donor account

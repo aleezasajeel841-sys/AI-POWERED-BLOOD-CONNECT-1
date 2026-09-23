@@ -3,6 +3,31 @@ import createToken from '../utils/token.js';
 import Hospital from '../models/hospital.model.js';
 import SystemManager from '../models/SystemManager.model.js';
 import HospitalAdmin from '../models/HospitalAdmin.model.js';
+import Receiver from '../models/receiver.model.js';
+
+export const signinR = async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password || email === '' || password === '') {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    try {
+        const receiver = await Receiver.signin(email, password);
+        if (!receiver.activeStatus) {
+            return res.status(403).json({ message: 'Your account has been deactivated' });
+        }
+
+        const token = createToken(receiver.id);
+        const receiverObj = receiver.toJSON();
+        delete receiverObj.password;
+        receiverObj._id = receiverObj.id;
+
+        res.status(200).json({ token, receiver: receiverObj, role: 'Receiver' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
 
 export const signinHD = async (req, res) => {
     const { email, password, userId } = req.body;

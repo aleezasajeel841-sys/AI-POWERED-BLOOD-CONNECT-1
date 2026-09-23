@@ -1,13 +1,13 @@
 :root {
   /* Primary colors - blood themed */
-  --primary-color: #e63946;
-  --primary-dark: #c1121f;
-  --primary-light: #ff6b6b;
+  --primary-color: #800000;
+  --primary-dark: #600000;
+  --primary-light: #c96868;
   
   /* Secondary colors */
-  --secondary-color: #1d3557;
-  --secondary-dark: #0d1b2a;
-  --secondary-light: #457b9d;
+  --secondary-color: #600000;
+  --secondary-dark: #400000;
+  --secondary-light: #c96868;
   
   /* Neutral colors */
   --background-light: #f8f9fa;
@@ -19,7 +19,7 @@
   --accent-color: #ffd166;
   --success-color: #2a9d8f;
   --warning-color: #f4a261;
-  --error-color: #e76f51;
+  --error-color: #800000;
   
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -105,7 +105,7 @@
 .modern-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+  box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.2);
 }
 
 .modern-label {

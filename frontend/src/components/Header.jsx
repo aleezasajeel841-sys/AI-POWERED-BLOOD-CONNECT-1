@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiUrl } from '../config/api.js';
 import { Button, Navbar, TextInput, Dropdown, Avatar, Modal, Label, Select, Spinner } from 'flowbite-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -208,7 +209,7 @@ export default function Header() {
           <Dropdown
             arrowIcon={false}
             inline
-            label={<Avatar alt="User" img={user?.userObj?.image ? `http://localhost:3020/${user.userObj.image}` : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
+            label={<Avatar alt="User" img={user?.userObj?.image ? apiUrl(`/${user.userObj.image}`) : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
           >
             <Dropdown.Header>
               <span className="block text-sm font-semibold">{user.userObj.lastName + " " + user.userObj.firstName || 'User'}</span>
@@ -224,7 +225,7 @@ export default function Header() {
           <Dropdown
             arrowIcon={false}
             inline
-            label={<Avatar alt="User" img={user?.userObj?.image ? `http://localhost:3020/${user.userObj.image}` : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
+            label={<Avatar alt="User" img={user?.userObj?.image ? apiUrl(`/${user.userObj.image}`) : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
           >
             <Dropdown.Header>
               <span className="block text-sm font-semibold">{user.userObj.name || 'User'}</span>
@@ -237,7 +238,7 @@ export default function Header() {
           <Dropdown
             arrowIcon={false}
             inline
-            label={<Avatar alt="User" img={secondUser?.userObj?.image ? `http://localhost:3020/${secondUser.userObj.image}` : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
+            label={<Avatar alt="User" img={secondUser?.userObj?.image ? apiUrl(`/${secondUser.userObj.image}`) : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
           >
             <Dropdown.Header>
               <span className="block text-sm font-semibold">{secondUser.userObj.firstName + " " + secondUser.userObj.lastName || 'User'}</span>
@@ -254,7 +255,7 @@ export default function Header() {
           <Dropdown
             arrowIcon={false}
             inline
-            label={<Avatar alt="User" img={user?.userObj?.image ? `http://localhost:3020/${user.userObj.image}` : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
+            label={<Avatar alt="User" img={user?.userObj?.image ? apiUrl(`/${user.userObj.image}`) : 'https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg'} rounded />}
           >
             <Dropdown.Header>
               <span className="block text-sm font-semibold">{user.userObj.lastName + " " + user.userObj.firstName || 'User'}</span>

@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+.auth-image-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+.auth-image-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 0, 0, 0.9);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.auth-image-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* Custom Animations */
 @layer utilities {
   .animate-fade-in {
@@ -42,4 +61,13 @@
   .sexy-card:hover {
     background-position: right center;
   }
+}
+
+.social-google-maroon {
+  filter: sepia(1) saturate(4) hue-rotate(305deg) brightness(0.82);
+}
+
+.social-google-maroon iframe {
+  width: 100% !important;
+  height: 44px !important;
 }

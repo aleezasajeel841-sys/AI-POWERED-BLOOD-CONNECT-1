@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../config/api.js';
 
 export default function Payment() {
   const [amount, setAmount] = useState('500');
@@ -11,7 +12,7 @@ export default function Payment() {
     setLoading(true);
     setMessage('');
     try {
-      const res = await fetch('http://localhost:3020/api/payment', {
+      const res = await fetch(apiUrl('/api/payment'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: Number(amount), paymentMethod: gateway, purpose: 'Donation' }),

@@ -111,7 +111,7 @@ export default function HospitalRegister() {
 
   return (
     <div
-      className="flex min-h-screen items-center justify-center p-6 bg-cover bg-center"
+      className="auth-image-bg flex min-h-screen items-center justify-center p-6 bg-cover bg-center"
       style={{ backgroundImage: `url(${background})` }}
     >
       <Card className="w-full max-w-5xl p-12 shadow-xl rounded-3xl bg-white bg-opacity-90 backdrop-blur-xl border border-red-100 transition-all duration-300 hover:shadow-2xl">

@@ -77,7 +77,7 @@ export default function HospitalLogin() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
+      className="auth-image-bg min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="login-container animate-fade-in">

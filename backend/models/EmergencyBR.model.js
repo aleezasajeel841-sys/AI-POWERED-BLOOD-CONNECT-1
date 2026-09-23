@@ -199,24 +199,26 @@ EmergencyBR.afterCreate(async (ebr) => {
 });
 
 // Cron job to check pending EBRs every 5 minutes
-cron.schedule('*/5 * * * *', async () => {
-    try {
-        const currentDate = new Date().toISOString().split('T')[0];
-        const pendingEBRs = await EmergencyBR.findAll({
-            where: {
-                acceptStatus: 'Pending',
-                activeStatus: 'Active',
-                withinDate: { [sequelize.Sequelize.Op.gte]: currentDate }
+if (process.env.VERCEL !== '1') {
+    cron.schedule('*/5 * * * *', async () => {
+        try {
+            const currentDate = new Date().toISOString().split('T')[0];
+            const pendingEBRs = await EmergencyBR.findAll({
+                where: {
+                    acceptStatus: 'Pending',
+                    activeStatus: 'Active',
+                    withinDate: { [sequelize.Sequelize.Op.gte]: currentDate }
+                }
+            });
+            for (const ebr of pendingEBRs) {
+                await EmergencyBR.handleEmergencyBloodRequest(ebr);
             }
-        });
-        for (const ebr of pendingEBRs) {
-            await EmergencyBR.handleEmergencyBloodRequest(ebr);
+            console.log(`Cron job processed ${pendingEBRs.length} pending EBRs`);
+        } catch (error) {
+            console.error('Cron job error:', error);
         }
-        console.log(`Cron job processed ${pendingEBRs.length} pending EBRs`);
-    } catch (error) {
-        console.error('Cron job error:', error);
-    }
-});
+    });
+}
 
 // Static method to cancel expired requests
 EmergencyBR.cancelExpiredRequests = async function () {

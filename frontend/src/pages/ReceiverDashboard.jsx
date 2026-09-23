@@ -20,7 +20,7 @@ export default function ReceiverDashboard() {
   });
 
   const bloodTypes = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
-  const urgencies = ["Low", "Normal", "High", "Critical"];
+  const urgencies = ["Normal", "Urgent"];
 
   useEffect(() => {
     loadData();
@@ -40,8 +40,17 @@ export default function ReceiverDashboard() {
   };
 
   const handleCreateRequest = async () => {
+    if (!newRequest.bloodType || !newRequest.unitsRequired || !newRequest.city.trim()) {
+      toast.error("Blood type, units required, and city are required");
+      return;
+    }
+
     try {
-      await createBloodRequest({ ...newRequest, receiverId: user?.userObj?._id });
+      await createBloodRequest({
+        ...newRequest,
+        unitsRequired: Number(newRequest.unitsRequired),
+        receiverId: user?.userObj?._id,
+      });
       toast.success("Blood request created successfully!");
       setShowCreateModal(false);
       setNewRequest({

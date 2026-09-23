@@ -59,7 +59,7 @@ export default function AdminLogin() {
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <Label htmlFor="email" value="Email" className="text-[#45315D] font-medium" />
+            <Label htmlFor="email" value="Email" className="text-[#600000] font-medium" />
             <TextInput
               id="email"
               type="email"
@@ -76,7 +76,7 @@ export default function AdminLogin() {
           </div>
 
           <div>
-            <Label htmlFor="password" value="Password" className="text-[#45315D] font-medium" />
+            <Label htmlFor="password" value="Password" className="text-[#600000] font-medium" />
             <TextInput
               id="password"
               type="password"

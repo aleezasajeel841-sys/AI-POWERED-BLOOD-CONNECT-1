@@ -72,7 +72,7 @@ export default function Dashboard() {
             datasets: [{
               label: 'Donations',
               data: totalDonors > 0 ? [Math.floor(totalDonors * 0.4), Math.floor(totalDonors * 0.5), Math.floor(totalDonors * 0.6), Math.floor(totalDonors * 0.7), Math.floor(totalDonors * 0.8), totalDonors] : [12, 19, 15, 25, 22, 30],
-              borderColor: '#ef4444',
+              borderColor: '#800000',
               backgroundColor: 'rgba(239, 68, 68, 0.1)',
               tension: 0.4,
               fill: true
@@ -110,8 +110,8 @@ export default function Dashboard() {
             datasets: [{
               data: totalDonors > 0 ? getBloodTypeDistribution() : [35, 8, 25, 5, 10, 2, 12, 3],
               backgroundColor: [
-                '#ef4444', '#f87171', '#dc2626', '#b91c1c',
-                '#7f1d1d', '#991b1b', '#f43f5e', '#e11d48'
+                '#800000', '#c96868', '#700000', '#600000',
+                '#4a0000', '#500000', '#900000', '#400000'
               ]
             }]
           },

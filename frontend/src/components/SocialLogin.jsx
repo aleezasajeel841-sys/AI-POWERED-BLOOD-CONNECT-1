@@ -37,20 +37,22 @@ const SocialLogin = ({ onLoginSuccess, userType }) => {
         <div className="border-t border-gray-300 flex-grow ml-3"></div>
       </div>
       
-      <div className="flex flex-col sm:flex-row gap-2 justify-center">
-        <GoogleLogin
-          onSuccess={handleGoogleSuccess}
-          onError={() => toast.error('Google login failed')}
-          useOneTap
-          shape="pill"
-          theme="filled_blue"
-          text="continue_with"
-          locale="en"
-        />
+      <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
+        <div className="social-google-maroon w-full sm:w-56 h-11 rounded-lg overflow-hidden">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => toast.error('Google login failed')}
+            useOneTap
+            shape="pill"
+            theme="filled_blue"
+            text="continue_with"
+            locale="en"
+          />
+        </div>
         
         <Button
           onClick={handleInstagramLogin}
-          className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white font-medium rounded-lg px-4 py-2 flex items-center justify-center"
+          className="w-full sm:w-56 h-11 bg-colour3 hover:bg-colour2 text-white font-medium rounded-lg px-4 py-2 flex items-center justify-center"
         >
           <FaInstagram className="mr-2" /> Instagram
         </Button>

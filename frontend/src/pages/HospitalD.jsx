@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { apiUrl } from "../config/api.js";
 import { Button, Spinner, Table, Modal, TextInput, Label, FileInput, Select } from "flowbite-react";
 import { DashboardSidebar } from "../components/DashboardSidebar";
 import { useHospital } from "../hooks/hospital";
@@ -399,7 +400,7 @@ export default function HospitalDashboard() {
               </Button>
               {reportUrl && (
                 <a
-                  href={`http://localhost:3020${reportUrl}`}
+                  href={apiUrl(reportUrl)}
                   download
                   className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
@@ -542,7 +543,7 @@ export default function HospitalDashboard() {
                             {hospital.activeStatus ? (
                               <Button
                                 size="xs"
-                                gradientDuoTone="cyanToBlue"
+                                gradientDuoTone="redToPink"
                                 onClick={() => handleEdit(hospital)}
                                 disabled={actionLoading}
                                 className="rounded-lg"

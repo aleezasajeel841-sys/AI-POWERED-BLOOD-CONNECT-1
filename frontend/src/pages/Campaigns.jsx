@@ -74,7 +74,7 @@ export default function Campaigns() {
 
   const getStatusBadge = (startDate, endDate) => {
     if (isUpcoming(startDate)) {
-      return <Badge color="blue">Upcoming</Badge>;
+      return <Badge color="failure">Upcoming</Badge>;
     } else if (isActive(startDate, endDate)) {
       return <Badge color="green">Active</Badge>;
     } else {
@@ -173,7 +173,7 @@ export default function Campaigns() {
                     </>
                   )}
                   {isUpcoming(campaign.startDate) && (
-                    <Button size="sm" color="blue" className="w-full">
+                    <Button size="sm" color="failure" className="w-full">
                       <FaCalendarAlt className="mr-1" />
                       Coming Soon
                     </Button>
